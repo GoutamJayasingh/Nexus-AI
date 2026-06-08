@@ -1,59 +1,42 @@
-# Nexus-AI
+Nexus AI
 
-## Overview
+A multi-tool AI assistant built using React, FastAPI, and Groq LLM.
 
-This project demonstrates how AI agents work using external tools.
+Features
+Chat interface
+Calculator tool
+PDF analysis
+Excel analysis
+Python code explanation
+Web search
+File upload support
+Automatic tool selection using LLM
+Tech Stack
 
-The agent can:
+Frontend:
 
-* Search the web
-* Read Excel files
-* Execute Python files
+React
+Axios
+CSS
 
-The tool outputs are passed to an LLM, which generates the final answer.
+Backend:
 
-## Architecture
+FastAPI
+Groq API
+Python
+Run Locally
 
-User Question
-↓
-Agent
-↓
-Choose Tool
-↓
-Execute Tool
-↓
-Collect Context
-↓
-LLM
-↓
-Answer
+Backend:
 
-## Tools
+uvicorn main --reload
 
-### Web Search
+Frontend:
 
-Uses DDGS to retrieve information from the internet.
+npm run dev
 
-### Excel Reader
-
-Reads spreadsheet data using pandas.
-
-### Python Executor
-
-Executes Python files and returns the output.
-
-## Technologies
-
-* Python
-* Groq API
-* Llama 3.3 70B
-* Pandas
-* DDGS
-
-## Learning Goals
-
-* Agent Architecture
-* Tool Calling
-* LLM Integration
-* Retrieval Workflows
-* AI Engineering Fundamentals
+Example Queries
+2+2
+Summarize this PDF
+What columns are in this Excel file?
+Explain this Python code
+What's happening in the world today?

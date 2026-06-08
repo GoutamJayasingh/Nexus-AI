@@ -1,7 +1,7 @@
 from tools import (
     search_web,
     read_excel,
-    execute_python,
+    read_python_file,
     calculator,
     read_pdf
 )
@@ -9,6 +9,7 @@ from tools import (
 from groq import Groq
 from dotenv import load_dotenv
 import os
+import re
 
 load_dotenv()
 
@@ -73,6 +74,28 @@ excel
 python
 pdf
 web
+chat
+
+Rules:
+
+- Use calculator ONLY for math calculations.
+Examples:
+2+2
+10*5
+calculate 100/4
+
+- Use excel when an Excel file is uploaded.
+
+- Use python when a Python file is uploaded.
+
+- Use pdf when a PDF file is uploaded.
+
+- Use web for current events, news, latest information,
+weather, sports, world updates.
+
+- Use chat for normal conversation, follow-up questions,
+greetings, explanations, elaborations, and anything that
+does not require a tool.
 
 Question:
 {question}
@@ -87,6 +110,7 @@ excel
 python
 pdf
 web
+chat
 """
 
     response = client.chat.completions.create(
@@ -113,27 +137,36 @@ class Agent:
 
     def answer(self, question, file_name=None):
 
-        tool = choose_tool_with_llm(
-        question,
-        file_name
-    )
+        if re.fullmatch(r"[0-9+\-*/(). ]+", question):
+            tool = "calculator"
+        else:
+            tool = choose_tool_with_llm(
+                question,
+                file_name
+            )
 
         reason = f"Chosen by LLM: {tool}"
 
         print("Using tool:", tool)
+        print("File received:", file_name)
 
         # Calculator
         if tool == "calculator":
 
-            answer = str(
-                calculator(question)
-            )
+            try:
+                answer = str(
+                    calculator(question)
+                )
 
-            return {
-                "tool": tool,
-                "reason": reason,
-                "answer": answer
-            }
+                return {
+                    "tool": tool,
+                    "reason": reason,
+                    "answer": answer
+                }
+
+            except Exception:
+
+                tool = "chat"
 
         file_context = ""
         web_context = ""
@@ -148,9 +181,12 @@ class Agent:
         # Python
         elif tool == "python":
 
-            file_context = execute_python(
+            file_context = read_python_file(
                 file_name
             )
+
+            print("PYTHON CONTENT:")
+            print(file_context)
 
         # Web
         elif tool == "web":
@@ -163,6 +199,8 @@ class Agent:
             file_context = read_pdf(
                 file_name
             )
+        elif tool == "chat":
+            pass
 
         # Reverse text support
         if question.startswith("."):

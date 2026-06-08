@@ -1,4 +1,4 @@
-from agent import Agent
+from backend.agent import Agent
 
 agent = Agent()
 

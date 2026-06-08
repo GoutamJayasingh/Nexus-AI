@@ -1,0 +1,370 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #0f172a;
+  color: white;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+/* APP */
+
+.app {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background: #0f172a;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+  width: 260px;
+  min-width: 260px;
+  background: #091427;
+  border-right: 1px solid #1f2a44;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+
+  box-shadow:
+    5px 0 25px rgba(
+      0,
+      0,
+      0,
+      0.25
+    );
+}
+
+.logo {
+  text-align: center;
+}
+
+.logo h2 {
+  font-size: 32px;
+  margin-bottom: 6px;
+}
+
+.logo p {
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.new-chat-btn {
+  margin-top: 24px;
+  padding: 14px;
+
+  border: none;
+  border-radius: 12px;
+
+  background: linear-gradient(
+    135deg,
+    #3b82f6,
+    #06b6d4
+  );
+
+  color: white;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.new-chat-btn:hover {
+  transform: translateY(-2px);
+}
+
+.menu {
+  margin-top: 12px;
+  padding: 12px;
+
+  border-radius: 10px;
+
+  color: #cbd5e1;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.menu:hover {
+  background: rgba(
+    255,
+    255,
+    255,
+    0.05
+  );
+}
+
+/* MAIN CONTENT */
+
+.main-content {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 20px;
+
+  overflow: hidden;
+}
+
+/* WELCOME */
+
+.welcome {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.welcome h1 {
+  font-size: 52px;
+  margin-bottom: 8px;
+}
+
+.welcome p {
+  color: #94a3b8;
+}
+
+/* CHAT WINDOW */
+
+.chat-container {
+  flex: 1;
+
+  background: #1e293b;
+
+  border-radius: 20px;
+
+  padding: 24px;
+
+  overflow-y: auto;
+
+  border: 1px solid rgba(
+    255,
+    255,
+    255,
+    0.05
+  );
+
+  box-shadow:
+    0 0 40px rgba(
+      59,
+      130,
+      246,
+      0.15
+    );
+}
+
+/* CHAT MESSAGES */
+
+.message {
+  padding: 14px 18px;
+
+  margin-bottom: 18px;
+
+  max-width: 70%;
+
+  line-height: 1.5;
+
+  word-wrap: break-word;
+}
+
+.user {
+  margin-left: auto;
+
+  background: #2563eb;
+
+  color: white;
+
+  border-radius:
+    18px
+    18px
+    4px
+    18px;
+}
+
+.assistant {
+  margin-right: auto;
+
+  background: #334155;
+
+  color: white;
+
+  border-radius:
+    18px
+    18px
+    18px
+    4px;
+}
+
+/* INPUT WRAPPER */
+
+.input-wrapper {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+
+  margin-top: 12px;
+}
+
+/* FILE CARD */
+
+.file-card {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  background: #1e293b;
+
+  border: 1px solid rgba(
+    255,
+    255,
+    255,
+    0.05
+  );
+
+  border-radius: 14px;
+
+  padding: 12px 16px;
+
+  width: fit-content;
+
+  max-width: 300px;
+}
+
+.file-icon {
+  font-size: 18px;
+}
+
+.file-name {
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* INPUT AREA */
+
+.input-area {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  width: 100%;
+}
+
+.input-area input {
+  flex: 1;
+
+  height: 60px;
+
+  background: #1e293b;
+
+  border: 1px solid rgba(
+    255,
+    255,
+    255,
+    0.05
+  );
+
+  border-radius: 14px;
+
+  padding: 0 20px;
+
+  color: white;
+
+  font-size: 16px;
+
+  outline: none;
+}
+
+.input-area input::placeholder {
+  color: #94a3b8;
+}
+
+.input-area button {
+  width: 60px;
+  min-width: 60px;
+
+  height: 60px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  background: #2563eb;
+
+  color: white;
+
+  font-size: 20px;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+
+  flex-shrink: 0;
+}
+
+.input-area button:hover {
+  background: #1d4ed8;
+}
+
+/* SCROLLBAR */
+
+.chat-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-container::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 10px;
+}
+
+.chat-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.file-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.remove-file {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.2s;
+}
+
+.remove-file:hover {
+  color: #ef4444;
+}
+
+.tool-badge {
+  font-size: 12px;
+  color: #60a5fa;
+
+  margin-bottom: 8px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.5px;
+}
+
+.message-time {
+  font-size: 11px;
+  color: #94a3b8;
+  margin-bottom: 6px;
+}

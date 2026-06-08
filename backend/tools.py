@@ -1,6 +1,7 @@
 import pandas as pd
 from ddgs import DDGS
 import subprocess
+from pypdf import PdfReader
 
 
 # Search the web
@@ -29,43 +30,35 @@ def read_excel(filepath):
 
     return df.to_string()
 
-
-# Read Python source code
+# Execute Python file and return output
 def read_python_file(filepath):
 
     with open(
         filepath,
         "r",
         encoding="utf-8"
-    ) as f:
+    ) as file:
 
-        return f.read()
+        code = file.read()
 
-
-# Execute Python file and return output
-def execute_python(filepath):
-
-    result = subprocess.run(
-        ["python", filepath],
-        capture_output=True,
-        text=True
-    )
-
-    return result.stdout.strip()
+    return code
 
 def calculator(expression):
     return eval(expression)
 
 import pdfplumber
 
-def read_pdf(filepath):
+def read_pdf(file_path):
+
+    reader = PdfReader(file_path)
 
     text = ""
 
-    with pdfplumber.open(filepath) as pdf:
+    for page in reader.pages:
 
-        for page in pdf.pages:
+        page_text = page.extract_text()
 
-            text += page.extract_text()
+        if page_text:
+            text += page_text
 
-    return text
+    return text[:10000]

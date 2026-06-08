@@ -1,6 +1,6 @@
 import streamlit as st
 import time
-from agent import Agent
+from backend.agent import Agent
 
 # =====================================
 # PAGE CONFIG (MUST BE FIRST)
