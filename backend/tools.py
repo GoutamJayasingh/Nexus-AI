@@ -2,7 +2,7 @@ import pandas as pd
 from ddgs import DDGS
 import subprocess
 from pypdf import PdfReader
-
+import requests
 
 # Search the web
 def search_web(query):
@@ -65,8 +65,52 @@ def read_pdf(file_path):
 
 def analyze_leetcode(username):
 
-        return f"""
-    Username: {username}
+    url = "https://leetcode.com/graphql"
 
-    LeetCode integration coming next...
+    query = """
+    query getUserProfile($username: String!) {
+      matchedUser(username: $username) {
+        username
+
+        submitStats {
+          acSubmissionNum {
+            difficulty
+            count
+          }
+        }
+      }
+    }
     """
+
+    response = requests.post(
+        url,
+        json={
+            "query": query,
+            "variables": {
+                "username": username
+            }
+        }
+    )
+
+    data = response.json()
+
+    stats = (
+        data["data"]
+        ["matchedUser"]
+        ["submitStats"]
+        ["acSubmissionNum"]
+    )
+
+    total = stats[0]["count"]
+    easy = stats[1]["count"]
+    medium = stats[2]["count"]
+    hard = stats[3]["count"]
+
+    return f"""
+Username: {username}
+
+Total Solved: {total}
+Easy: {easy}
+Medium: {medium}
+Hard: {hard}
+"""

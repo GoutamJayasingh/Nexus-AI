@@ -208,19 +208,10 @@ class Agent:
             )
         elif tool == "leetcode":
 
-            words = question.split()
+            username = question.split()[-1]
 
-            username = words[-1]
+            file_context = analyze_leetcode(username)
 
-            answer = analyze_leetcode(
-                username
-            )
-
-            return {
-                "tool": tool,
-                "reason": reason,
-                "answer": answer
-            }
         elif tool == "chat":
             pass
 
@@ -233,15 +224,26 @@ class Agent:
 Question:
 {question}
 
-File Content:
+LeetCode Profile Data:
+
 {file_context}
 
-Web Search Results:
-{web_context}
+IMPORTANT:
+Start by displaying the profile statistics.
 
-Use the information provided.
+Then provide:
 
-Return ONLY the final answer.
+## Current Level
+
+## Strengths
+
+## Weaknesses
+
+## Recommended Next Topics
+
+## 30-Day Improvement Plan
+
+Return the answer in markdown format.
 """
 
         response = client.chat.completions.create(
