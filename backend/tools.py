@@ -62,3 +62,11 @@ def read_pdf(file_path):
             text += page_text
 
     return text[:10000]
+
+def analyze_leetcode(username):
+
+        return f"""
+    Username: {username}
+
+    LeetCode integration coming next...
+    """

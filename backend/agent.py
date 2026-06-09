@@ -3,7 +3,8 @@ from tools import (
     read_excel,
     read_python_file,
     calculator,
-    read_pdf
+    read_pdf,
+    analyze_leetcode
 )
 
 from groq import Groq
@@ -74,6 +75,7 @@ excel
 python
 pdf
 web
+leetcode
 chat
 
 Rules:
@@ -93,6 +95,10 @@ calculate 100/4
 - Use web for current events, news, latest information,
 weather, sports, world updates.
 
+- Use leetcode when the user asks about a LeetCode profile,
+LeetCode statistics, coding profile analysis, contest rating,
+or DSA roadmap based on LeetCode.
+
 - Use chat for normal conversation, follow-up questions,
 greetings, explanations, elaborations, and anything that
 does not require a tool.
@@ -110,6 +116,7 @@ excel
 python
 pdf
 web
+leetcode
 chat
 """
 
@@ -199,6 +206,21 @@ class Agent:
             file_context = read_pdf(
                 file_name
             )
+        elif tool == "leetcode":
+
+            words = question.split()
+
+            username = words[-1]
+
+            answer = analyze_leetcode(
+                username
+            )
+
+            return {
+                "tool": tool,
+                "reason": reason,
+                "answer": answer
+            }
         elif tool == "chat":
             pass
 
